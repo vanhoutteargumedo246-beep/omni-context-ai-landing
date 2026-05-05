@@ -457,6 +457,41 @@
             font-size: 0.95rem;
         }
 
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .guide-card {
+            background: rgba(33, 38, 45, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #30363d;
+        }
+
+        .guide-card h3 {
+            color: #58a6ff;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .guide-card p {
+            color: #8b949e;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .guide-note {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+            background: rgba(31, 111, 235, 0.08);
+            color: #c9d1d9;
+        }
+
         .highlight {
             background: linear-gradient(90deg, #1f6feb 0%, #58a6ff 100%);
             -webkit-background-clip: text;
@@ -718,6 +753,36 @@
                     我们强烈推荐使用 <span class="highlight">智谱 Coding Plan</span>、<span class="highlight">Kimi For
                         Coding</span>，因为它们为开发者和专业用户提供了最优化的体验，包括出色的代码理解能力、长上下文支持和灵活的模型切换功能。
                 </p>
+            </div>
+        </div>
+
+        <!-- Setup Guide Section -->
+        <div class="section">
+            <h2 class="section-title">AI 接入指引</h2>
+            <p style="color: #8b949e; margin-bottom: 20px;">
+                按照以下步骤完成扩展安装与模型配置，即可在浏览器侧边栏中使用 Omni Context AI。
+            </p>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h3><i data-lucide="download" style="vertical-align: middle; margin-right: 6px;"></i>步骤 1：下载扩展包</h3>
+                    <p>点击顶部「下载 omni-context-ai.zip」按钮，获取最新版本压缩包并解压，准备好 <code>dist</code> 目录。</p>
+                </div>
+                <div class="guide-card">
+                    <h3><i data-lucide="puzzle" style="vertical-align: middle; margin-right: 6px;"></i>步骤 2：安装到 Chrome</h3>
+                    <p>打开 <code>chrome://extensions/</code>，开启开发者模式，点击「加载已解压的扩展程序」，选择解压后的 <code>dist</code> 目录。</p>
+                </div>
+                <div class="guide-card">
+                    <h3><i data-lucide="key-round" style="vertical-align: middle; margin-right: 6px;"></i>步骤 3：配置 AI 服务</h3>
+                    <p>打开扩展设置页，选择你要使用的 AI 服务商（如智谱、Kimi 或兼容 API），填写 API Key 与 Base URL（若服务商要求）。</p>
+                </div>
+                <div class="guide-card">
+                    <h3><i data-lucide="sliders-horizontal" style="vertical-align: middle; margin-right: 6px;"></i>步骤 4：选择模型并测试</h3>
+                    <p>在模型列表中选择可用模型，保存后打开侧边栏发起对话。建议先测试「读取当前网页内容」确认连接成功。</p>
+                </div>
+            </div>
+            <div class="guide-note">
+                <i data-lucide="info" style="vertical-align: middle; margin-right: 6px;"></i>
+                如遇到连接失败，请先检查 API Key 是否有效、账户额度是否充足，以及 Base URL 是否与服务商文档保持一致。
             </div>
         </div>
 
