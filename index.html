@@ -565,6 +565,82 @@
             }
         }
 
+        .donation-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .donation-btn {
+            padding: 10px 22px;
+            border-radius: 8px;
+            border: 1px solid #388bfd;
+            background: linear-gradient(90deg, #1f6feb 0%, #58a6ff 100%);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .donation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(31, 111, 235, 0.35);
+        }
+
+        .qr-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .qr-modal.active {
+            display: flex;
+        }
+
+        .qr-modal-content {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 14px;
+            max-width: 340px;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .qr-modal-close {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .qr-modal-title {
+            color: #58a6ff;
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+        }
+
+        .qr-modal-image {
+            width: 220px;
+            height: 220px;
+            max-width: 100%;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+
         code {
             background: rgba(110, 118, 129, 0.2);
             padding: 2px 6px;
@@ -793,16 +869,18 @@
                 如果 Omni Context AI 帮您节省了时间，或者让您的工作更高效，
                 <br>欢迎请我们喝杯咖啡，支持我们继续打磨这个产品！
             </p>
-            <div class="qr-codes">
-                <div class="qr-item">
-                    <h4>支付宝</h4>
-                    <img src="assets/donation/alipay.png" alt="支付宝收款码" />
-                </div>
-                <div class="qr-item">
-                    <h4>微信</h4>
-                    <img src="assets/donation/wechat.png" alt="微信收款码" />
-                </div>
+            <div class="donation-actions">
+                <button class="donation-btn" onclick="openQrModal('alipay')">查看支付宝收款码</button>
+                <button class="donation-btn" onclick="openQrModal('wechat')">查看微信收款码</button>
             </div>
+        </div>
+    </div>
+
+    <div id="qrModal" class="qr-modal" onclick="closeQrModalOnOverlay(event)">
+        <div class="qr-modal-content">
+            <button class="qr-modal-close" onclick="closeQrModal()" aria-label="关闭">&times;</button>
+            <h3 id="qrModalTitle" class="qr-modal-title">收款码</h3>
+            <img id="qrModalImage" class="qr-modal-image" src="" alt="收款码" />
         </div>
     </div>
 
@@ -830,6 +908,44 @@
         document.addEventListener('DOMContentLoaded', function () {
             lucide.createIcons();
         });
+
+        const qrConfig = {
+            alipay: {
+                title: '支付宝收款码',
+                src: 'assets/donation/alipay.png',
+                alt: '支付宝收款码'
+            },
+            wechat: {
+                title: '微信收款码',
+                src: 'assets/donation/wechat.png',
+                alt: '微信收款码'
+            }
+        };
+
+        function openQrModal(type) {
+            const modal = document.getElementById('qrModal');
+            const title = document.getElementById('qrModalTitle');
+            const image = document.getElementById('qrModalImage');
+            const config = qrConfig[type];
+
+            if (!config) return;
+
+            title.textContent = config.title;
+            image.src = config.src;
+            image.alt = config.alt;
+            modal.classList.add('active');
+        }
+
+        function closeQrModal() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('active');
+        }
+
+        function closeQrModalOnOverlay(event) {
+            if (event.target.id === 'qrModal') {
+                closeQrModal();
+            }
+        }
     </script>
 </body>
 
